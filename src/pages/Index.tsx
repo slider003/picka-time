@@ -1,99 +1,93 @@
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Calendar, Users, Clock, CheckCircle } from "lucide-react";
-import { Link } from "react-router-dom";
+import { CalendarDays, Users, Clock, ArrowRight } from "lucide-react";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center py-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Time Slot Scheduler
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Find the perfect time that works for everyone
-          </p>
-          
-          <div className="flex gap-4 justify-center mb-12">
-            <Link to="/admin">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                <Calendar className="mr-2 h-5 w-5" />
-                Create New Calendar
-              </Button>
-            </Link>
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <div className="border-b">
+        <div className="max-w-7xl mx-auto px-4 py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight">Calendar Scheduler</h1>
+              <p className="text-muted-foreground mt-2">
+                Create and share availability calendars with your team
+              </p>
+            </div>
+            <Button onClick={() => navigate("/admin")}>
+              Admin Panel
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
           </div>
         </div>
+      </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          <Card>
-            <CardHeader>
-              <Calendar className="h-8 w-8 text-blue-600 mb-2" />
-              <CardTitle>Set Date Range</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Define the available date range and time slots for participants to choose from
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <Users className="h-8 w-8 text-green-600 mb-2" />
-              <CardTitle>Share Link</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Send the calendar link to participants so they can select their available times
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <Clock className="h-8 w-8 text-orange-600 mb-2" />
-              <CardTitle>Collect Responses</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Participants select multiple time slots when they're available
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CheckCircle className="h-8 w-8 text-purple-600 mb-2" />
-              <CardTitle>Find Best Time</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Automatically find the optimal time slot that works for the most people
-              </CardDescription>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-            How it works
+      {/* Hero Section */}
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold tracking-tight mb-4">
+            Coordinate schedules effortlessly
           </h2>
-          <div className="max-w-3xl mx-auto text-gray-600 space-y-4">
-            <p>
-              1. <strong>Admin Setup:</strong> Create a calendar with your desired date range and maximum selections per user
-            </p>
-            <p>
-              2. <strong>Share:</strong> Send the generated link to all participants
-            </p>
-            <p>
-              3. <strong>Collect:</strong> Participants select all time slots when they're available
-            </p>
-            <p>
-              4. <strong>Analyze:</strong> View results and see the optimal time slots with the most availability
-            </p>
-          </div>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Create availability calendars, share them with your team, and find the best meeting times instantly.
+          </p>
+        </div>
+
+        {/* Features */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <Card>
+            <CardHeader>
+              <CalendarDays className="h-8 w-8 mb-2" />
+              <CardTitle>Easy Scheduling</CardTitle>
+              <CardDescription>
+                Create custom time slots and date ranges for any event or meeting
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <Users className="h-8 w-8 mb-2" />
+              <CardTitle>Team Collaboration</CardTitle>
+              <CardDescription>
+                Share calendar links with your team and collect availability responses
+              </CardDescription>
+            </CardHeader>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <Clock className="h-8 w-8 mb-2" />
+              <CardTitle>Real-time Results</CardTitle>
+              <CardDescription>
+                See responses update in real-time and identify the best meeting times
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center">
+          <Card className="max-w-md mx-auto">
+            <CardHeader>
+              <CardTitle>Get Started</CardTitle>
+              <CardDescription>
+                Create your first availability calendar in minutes
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={() => navigate("/admin")} className="w-full">
+                Create Calendar
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
