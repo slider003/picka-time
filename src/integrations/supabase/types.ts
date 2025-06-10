@@ -9,6 +9,45 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      calendars: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          description: string | null
+          end_date: string
+          id: string
+          max_selections: number
+          name: string
+          start_date: string
+          time_slots: string[]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          end_date: string
+          id?: string
+          max_selections?: number
+          name: string
+          start_date: string
+          time_slots?: string[]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          end_date?: string
+          id?: string
+          max_selections?: number
+          name?: string
+          start_date?: string
+          time_slots?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       notes: {
         Row: {
           content: string
@@ -201,6 +240,47 @@ export type Database = {
           target_url?: string
         }
         Relationships: []
+      }
+      time_slot_responses: {
+        Row: {
+          calendar_id: string
+          created_at: string
+          id: string
+          selected_slots: Json
+          updated_at: string
+          user_email: string | null
+          user_id: string | null
+          user_name: string
+        }
+        Insert: {
+          calendar_id: string
+          created_at?: string
+          id?: string
+          selected_slots?: Json
+          updated_at?: string
+          user_email?: string | null
+          user_id?: string | null
+          user_name: string
+        }
+        Update: {
+          calendar_id?: string
+          created_at?: string
+          id?: string
+          selected_slots?: Json
+          updated_at?: string
+          user_email?: string | null
+          user_id?: string | null
+          user_name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "time_slot_responses_calendar_id_fkey"
+            columns: ["calendar_id"]
+            isOneToOne: false
+            referencedRelation: "calendars"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_reading_plans: {
         Row: {
