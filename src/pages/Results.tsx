@@ -1,9 +1,9 @@
-
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ArrowLeft, Users, Calendar, Clock, Trophy, Copy, ExternalLink } from "lucide-react";
 import { format, parseISO } from "date-fns";
@@ -89,7 +89,16 @@ const Results = () => {
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setResponses(data || []);
+      
+      // Transform the data to match our interface
+      const transformedData = data?.map(response => ({
+        ...response,
+        selected_slots: Array.isArray(response.selected_slots) 
+          ? response.selected_slots as Array<{ date: string; time: string; datetime: string; }>
+          : []
+      })) || [];
+      
+      setResponses(transformedData);
     } catch (error) {
       console.error('Error fetching responses:', error);
     } finally {

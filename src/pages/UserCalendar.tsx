@@ -86,7 +86,16 @@ const UserCalendar = () => {
         .eq('calendar_id', calendarId);
 
       if (error) throw error;
-      setResponses(data || []);
+      
+      // Transform the data to match our interface
+      const transformedData = data?.map(response => ({
+        ...response,
+        selected_slots: Array.isArray(response.selected_slots) 
+          ? response.selected_slots as Array<{ date: string; time: string; datetime: string; }>
+          : []
+      })) || [];
+      
+      setResponses(transformedData);
     } catch (error) {
       console.error('Error fetching responses:', error);
     }
